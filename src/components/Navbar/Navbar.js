@@ -16,7 +16,7 @@ const Navbar = ({ likedCount }) => {
           <li><Link to="/">Home</Link></li>
           <li><Link to="/about">About Us</Link></li>
           <li><Link to="/login">Akun</Link></li>
-          <li><Link to="/favorites">Favorit ({likedCount})</Link></li> {/* Link to Favorites */}
+          <li><Link to="/favorites">Favorit ({likedCount})</Link></li> 
         </ul>
       </div>
     </nav>

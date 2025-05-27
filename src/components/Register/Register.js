@@ -11,13 +11,11 @@ const Register = () => {
   const handleRegister = (e) => {
     e.preventDefault();
 
-    // Check if password and confirm password match
     if (password !== confirmPassword) {
       alert("Passwords do not match");
       return;
     }
 
-    // Add your registration logic here
     console.log('Registration attempted:', { fullName, username, email, password });
   };
 

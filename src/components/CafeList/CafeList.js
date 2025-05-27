@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import './CafeList.css';
 
-const CafeList = ({ setLikedCount }) => {
+const CafeList = ({ setLikedCount, searchQuery = '' }) => {
   const [cafes, setCafes] = useState([]);
   const [favorites, setFavorites] = useState([]);
 
@@ -11,51 +12,46 @@ const CafeList = ({ setLikedCount }) => {
       .then(data => setCafes(data))
       .catch(error => console.error("Error fetching cafes:", error));
 
-    // Load favorites from localStorage
     const storedFavorites = JSON.parse(localStorage.getItem('likedCafes')) || [];
     setFavorites(storedFavorites);
   }, []);
 
   const handleLike = (id, cafe) => {
-    // Check if cafe is already liked
     const isLiked = favorites.some(fav => fav.id === id);
+    const newFavorites = isLiked
+      ? favorites.filter(fav => fav.id !== id)
+      : [...favorites, cafe];
 
-    let newFavorites; // Declare newFavorites here
-
-    if (isLiked) {
-      // If already liked, remove from favorites
-      newFavorites = favorites.filter(fav => fav.id !== id);
-    } else {
-      // If not liked, add to favorites
-      newFavorites = [...favorites, cafe];
-    }
-
-    // Update the favorites state and localStorage
     setFavorites(newFavorites);
-    localStorage.setItem('likedCafes', JSON.stringify(newFavorites)); // Save updated favorites
-
-    // Update the liked count
-    setLikedCount(newFavorites.length);  // Update the count in App.js
+    localStorage.setItem('likedCafes', JSON.stringify(newFavorites));
+    setLikedCount(newFavorites.length);
   };
+
+  const filteredCafes = cafes.filter(cafe =>
+    cafe.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    cafe.location.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div className="cafe-list">
       <div className="cafe-grid">
-        {cafes.map(cafe => {
-          const imageSrc = require(`../../assets/${cafe.image}`);
+        {filteredCafes.map(cafe => {
+          let imageSrc;
+          try {
+            imageSrc = require(`../../assets/${cafe.image}`);
+          } catch (err) {
+            imageSrc = 'https://via.placeholder.com/150';
+          }
+
           const isLiked = favorites.some(fav => fav.id === cafe.id);
 
           return (
             <div className="cafe-item" key={cafe.id}>
               <div className="image-container">
-                <img 
-                  src={imageSrc} 
-                  alt={cafe.name} 
-                  className="cafe-image" 
-                />
+                <img src={imageSrc} alt={cafe.name} className="cafe-image" />
                 <button
                   className={`love-button ${isLiked ? 'liked' : ''}`}
-                  onClick={() => handleLike(cafe.id, cafe)} // Handle click to toggle like
+                  onClick={() => handleLike(cafe.id, cafe)}
                 >
                   ♥
                 </button>
@@ -65,12 +61,10 @@ const CafeList = ({ setLikedCount }) => {
                 <p>{cafe.location}</p>
                 <p>Rating: {cafe.rating}</p>
                 <div className="view-buttons">
-                  <button onClick={() => console.log('View details for cafe', cafe.id)}>
-                    View Details
-                  </button>
-                  <button onClick={() => window.open(cafe.maps, "_blank")}>
-                    View Maps
-                  </button>
+                  <Link to={`/cafe/${cafe.id}`}>
+                    <button>View Details</button>
+                  </Link>
+                  <button onClick={() => window.open(cafe.maps, "_blank")}>View Maps</button>
                 </div>
               </div>
             </div>

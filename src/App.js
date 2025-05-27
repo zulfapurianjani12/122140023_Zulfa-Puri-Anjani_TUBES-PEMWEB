@@ -1,49 +1,73 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
-import CafeList from './components/CafeList/CafeList'; // Komponen CafeList
+import CafeList from './components/CafeList/CafeList';
 import CafeDetail from './components/CafeDetail/CafeDetail';
 import Favorites from './components/Favorites/Favorites';
 import Banner from './components/Banner/Banner';
 import Login from './components/Login/Login';
-import Register from './components/Register/Register'; 
+import Register from './components/Register/Register';
+import AboutUs from './components/AboutUs/AboutUs';
+
 import './App.css';
 
 function App() {
   const [likedCount, setLikedCount] = useState(0);
+  const [searchQuery, setSearchQuery] = useState(''); // ✅ State pencarian global
 
-  // useEffect untuk memuat likedCafes dari localStorage dan update likedCount
   useEffect(() => {
     const likedCafes = JSON.parse(localStorage.getItem('likedCafes')) || [];
-    setLikedCount(likedCafes.length); // Menghitung jumlah cafe yang disukai
+    setLikedCount(likedCafes.length);
   }, []);
 
   return (
     <Router>
       <div>
-        <Navbar likedCount={likedCount} />
+        {/* ✅ Navbar bisa input pencarian */}
+        <Navbar
+          likedCount={likedCount}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+        />
         <Routes>
-          {/* Menampilkan Banner hanya di halaman selain login dan register */}
-          <Route path="/" element={<HomePage setLikedCount={setLikedCount} />} />
+          <Route
+            path="/"
+            element={
+              <HomePage
+                setLikedCount={setLikedCount}
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
+              />
+            }
+          />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/cafe/:id" element={<CafeDetail />} />
           <Route path="/favorites" element={<Favorites />} />
+          <Route path="/about" element={<AboutUs />} />
         </Routes>
       </div>
     </Router>
   );
 }
 
-function HomePage({ setLikedCount }) {
+function HomePage({ setLikedCount, searchQuery, setSearchQuery }) {
   const location = useLocation();
   const isLoginOrRegister = location.pathname === '/login' || location.pathname === '/register';
 
   return (
     <div>
-      {/* Hanya tampilkan Banner jika bukan di halaman login atau register */}
-      {!isLoginOrRegister && <Banner />}
-      <CafeList setLikedCount={setLikedCount} />
+      {/* ✅ Banner bisa input pencarian juga */}
+      {!isLoginOrRegister && (
+        <Banner
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+        />
+      )}
+      <CafeList
+        setLikedCount={setLikedCount}
+        searchQuery={searchQuery}
+      />
     </div>
   );
 }
