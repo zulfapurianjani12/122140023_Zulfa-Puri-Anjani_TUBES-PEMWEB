@@ -1,0 +1,50 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;  /* Mengatur konten kiri dan kanan secara terpisah */
+  align-items: center;  /* Memastikan elemen di dalam navbar terpusat secara vertikal */
+  background-color: #333;
+  padding: 10px 20px;  /* Memberikan padding di navbar */
+  color: white;
+  position: sticky;  /* Agar navbar tetap di atas saat scroll */
+  top: 0;  /* Menempel di atas */
+  width: 100%;  /* Mengatur lebar navbar */
+  z-index: 1000;  /* Agar navbar tetap di atas konten lainnya */
+}
+
+/* Navbar.css */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 400px; /* Sesuaikan ukuran gambar logo */
+  height: auto;
+  margin-right: 10px;
+}
+
+.logo-text {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.navbar-menu ul {
+  list-style-type: none;
+  display: flex;  /* Membuat menu menjadi satu baris */
+  padding: 0;  /* Menghapus padding pada list */
+  margin: 0;  /* Menghapus margin default */
+}
+
+.navbar-menu ul li {
+  margin-left: 20px;  /* Memberikan jarak antar menu */
+}
+
+.navbar-menu ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.navbar-menu ul li a:hover {
+  text-decoration: underline;  /* Memberikan garis bawah saat hover */
+}
