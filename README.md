@@ -14,6 +14,7 @@
 
 ## 🛠️ Teknologi yang Digunakan
 
+### Frontend
 - **React** v19.1.0
 - **React Router DOM** v6.30.0
 - **Axios** v1.9.0
@@ -21,6 +22,13 @@
 - **React Scripts** v5.0.1
 - **Testing Library** (React, DOM, Jest, User Event)
 - **Web Vitals** untuk pengukuran performa
+
+
+### Backend
+- **Python** dengan **Pyramid Framework**
+- **PostgreSQL** sebagai basis data utama
+- **SQLAlchemy** untuk ORM (jika digunakan)
+
 
 ## 📦 Instalasi
 
@@ -61,15 +69,18 @@ Testing dilakukan menggunakan kombinasi dari `@testing-library/react`, `@testing
 
 ```
 nongki-geh/
-├── public/                 # File statis dan HTML utama
-├── src/
-│   ├── components/         # Komponen UI reusable
-│   ├── pages/              # Halaman utama (beranda, detail, dll.)
-│   ├── App.js              # Root komponen utama
-│   └── index.js            # Entry point aplikasi
-├── .gitignore              # File yang diabaikan Git
-├── package.json            # Metadata proyek dan dependencies
-└── README.md               # Dokumentasi proyek
+├── backend/                # Backend Pyramid Python
+│   ├── development.ini     # Konfigurasi environment
+│   └── ...
+├── frontend/               # Frontend React
+│   ├── src/
+│   │   ├── components/     # Komponen UI reusable
+│   │   ├── pages/          # Halaman utama
+│   │   ├── App.js          # Komponen utama
+│   │   └── index.js        # Entry point
+├── .gitignore
+├── README.md
+└── ...
 ```
 
 ## 👨‍💻 Kontribusi
