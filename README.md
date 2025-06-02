@@ -93,6 +93,4 @@ Kontribusi sangat terbuka! Jika kamu menemukan bug, ide fitur baru, atau peningk
 - Push ke branch (`git push origin fitur-anda`)
 - Buat Pull Request
 
-## 📄 Lisensi
 
-Proyek ini bersifat **privat** dan digunakan untuk keperluan pembelajaran dan pengembangan pribadi. Jika ingin menggunakan untuk keperluan publik, harap hubungi pemilik proyek.
