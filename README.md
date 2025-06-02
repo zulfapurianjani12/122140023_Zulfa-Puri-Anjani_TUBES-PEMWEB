@@ -1,7 +1,7 @@
 
 # Nongki-Geh
 
-**Nongki-Geh** adalah aplikasi web berbasis React yang dirancang untuk membantu pengguna menemukan dan mengeksplorasi tempat nongkrong favorit. Aplikasi ini memiliki antarmuka modern, ramah pengguna, serta dibangun dengan teknologi web terkini untuk pengalaman penggunaan yang maksimal.
+
 
 ## 🚀 Fitur Unggulan
 
